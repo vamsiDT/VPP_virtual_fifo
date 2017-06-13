@@ -8,3 +8,5 @@ This is a Virtual fifo implementation before the transmit node of VPP to limit t
 2) Check for the comment "start of extra code" , "end of extra code" to find the changed to be made in default vpp git code.
 
 3) Parameter ALPHA in fifo.h defines the percentage of bandwidth to be utilized. For example if you want to use only upto 1Gbps bandwidth in a 10Gbps link, ALPHA will be 0.1 .
+
+4) ip4_forward.c in vpp/src/vnet/ip directory should be modified according to the changes mentioned in step 2, fifo.h,fifo_var.h should be copied to this directory and included in ip4_forward.c
