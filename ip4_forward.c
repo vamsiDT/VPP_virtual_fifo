@@ -2338,6 +2338,7 @@ ip4_rewrite_inline (vlib_main_t * vm,
 //////////////start of extra code///////////////
   old_t = t;
   t = (u64)((vlib_time_now(vm))*1000000000);
+  threshold=(t-old_t)*ALPHA;
 //////////////end of extra code///////////////
   while (n_left_from > 0)
     {
