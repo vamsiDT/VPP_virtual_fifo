@@ -13,7 +13,7 @@ extern u32 fifoqueue;
 
 always_inline u8 fifo(u16 pktlen){
 	u8 drop;
-	if(fifoqueue<=threshold){
+	if(fifoqueue <= threshold ){
 		fifoqueue+=pktlen;
         drop=0;
     }

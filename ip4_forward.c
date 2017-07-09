@@ -2337,7 +2337,7 @@ ip4_rewrite_inline (vlib_main_t * vm,
   u32 thread_index = vlib_get_thread_index ();
 //////////////start of extra code///////////////
   old_t = t;
-  t = (u64)((vlib_time_now(vm))*1000000000);
+  t = (u64)((unix_time_now_nsec ())*1000000000);
   threshold=(t-old_t)*ALPHA;
 //////////////end of extra code///////////////
   while (n_left_from > 0)
@@ -2535,8 +2535,8 @@ ip4_rewrite_inline (vlib_main_t * vm,
 
 //////////////start of extra code///////////////
     u8 drop0,drop1;
-	pktlen0 = p0->current_length;
-	pktlen1 = p1->current_length;
+	pktlen0 = p0->current_length + 4;
+	pktlen1 = p1->current_length + 4;
 	drop0 = fifo(pktlen0);
 	drop1 = fifo(pktlen1);
 	if(PREDICT_FALSE(drop0 == 1)){
@@ -2593,7 +2593,7 @@ ip4_rewrite_inline (vlib_main_t * vm,
 
 //////////////start of extra code///////////////
 	u16 pktlen0;
-//////////////end of extra code///////////////	
+//////////////end of extra code///////////////
 
 	  u32 pi0, rw_len0, adj_index0, next0, error0, checksum0;
 	  u32 tx_sw_if_index0;
@@ -2709,7 +2709,7 @@ ip4_rewrite_inline (vlib_main_t * vm,
 
 ///////////////start of extra code///////////
     u8 drop0;
-	pktlen0 = p0->current_length;
+	pktlen0 = p0->current_length + 4;
 	drop0 = fifo(pktlen0);
 	if(PREDICT_FALSE(drop0 == 1)){
 		next0 = IP4_REWRITE_NEXT_DROP;
